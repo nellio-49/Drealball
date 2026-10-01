@@ -576,7 +576,7 @@
         
         .match-status-td { padding: 6px 6px !important; text-align: center; }
 
-        /* ─── OPTIMISATIONS MOBILES SPÉCIFIQUES (ÉCRANS < 768px) ─── */
+        /* ─── OPTIMISATIONS MOBILES SPÉCIFIQUES ─── */
         @media (max-width: 768px) {
             input, select, textarea {
                 font-size: 16px !important;
@@ -823,7 +823,7 @@
                 <tbody id="classement-body"></tbody>
             </table>
         </div>
-        <button class="sort-btn" onclick="sortClassement()">⬡ Trier par points</button>
+        <button class="sort-btn" onclick="sortClassement()">⬡ Trier par Valeur MC</button>
     </div>
 
     <div class="divider"></div>
@@ -1179,6 +1179,8 @@
         
         const mcCell = document.getElementById(`classement-mc-${teamIdx}`);
         if (mcCell) mcCell.textContent = `${total} MC`;
+
+        sortClassement();
     };
 
     // ── Calcul Automatique du Classement selon les Rencontres ────────
@@ -1202,7 +1204,6 @@
             const sDVal   = scores[0]?.value;
             const sEVal   = scores[1]?.value;
 
-            // Le match est comptabilisé s'il est "Joué" et possède des scores valides
             if (status === 'joue' && sDVal !== '' && sEVal !== '' && !isNaN(sDVal) && !isNaN(sEVal)) {
                 const sD = parseInt(sDVal, 10);
                 const sE = parseInt(sEVal, 10);
@@ -1304,17 +1305,18 @@
         td8.style.color = diff >= 0 ? 'var(--accent)' : 'var(--accent2)';
     };
 
+    /* Tri par Valeur MC (priorité 1), puis Points (2), puis Différence (3) */
     window.sortClassement = function() {
         const tbody = document.getElementById('classement-body');
         const rows  = Array.from(tbody.querySelectorAll('tr'));
         rows.sort((a,b) => {
+            const mc = r => parseInt(r.querySelector('.mc-val')?.textContent) || 0;
             const p = r => Number(r.querySelectorAll('input[type="number"]')[6]?.value) || 0;
             const diff = r => parseInt(r.querySelector('.diff-cell')?.textContent) || 0;
-            const pp = r => Number(r.querySelectorAll('input[type="number"]')[4]?.value) || 0;
             
+            if (mc(b) !== mc(a)) return mc(b) - mc(a);
             if (p(b) !== p(a)) return p(b) - p(a);
-            if (diff(b) !== diff(a)) return diff(b) - diff(a);
-            return pp(b) - pp(a);
+            return diff(b) - diff(a);
         });
         rows.forEach((r,i) => {
             const rank = i + 1;
@@ -1326,22 +1328,7 @@
         });
     };
 
-    window.sortClassementByMC = function() {
-        const tbody = document.getElementById('classement-body');
-        const rows  = Array.from(tbody.querySelectorAll('tr'));
-        rows.sort((a,b) => {
-            const getMC = r => parseInt(r.querySelector('.mc-val')?.textContent) || 0;
-            return getMC(b) - getMC(a);
-        });
-        rows.forEach((r,i) => {
-            const rank = i + 1;
-            const el   = r.querySelector('.rank');
-            el.className   = `rank${rank <= 3 ? ' rank-'+rank : ''}`;
-            el.textContent = rank;
-            r.classList.toggle('leader', rank === 1);
-            tbody.appendChild(r);
-        });
-    };
+    window.sortClassementByMC = window.sortClassement;
 
     function buildMatches(phase) {
         const names = Array.from(document.querySelectorAll('.team-name-big')).map((el,i) => el.value || TEAM_DEFAULTS_NAMES[i]);
