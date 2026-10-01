@@ -16,7 +16,7 @@
             --accent3: #d97706;    /* Ambre/Or */
             --text: #1e293b;       /* Texte sombre */
             --muted: #64748b;      /* Texte secondaire */
-            --border: #cbd5e1;     /* Bordures */
+            --border: #cbd5e1;      /* Bordures */
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
             --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
@@ -236,7 +236,7 @@
             flex-shrink: 0;
             background: var(--surface);
         }
-        .team-info { flex: 1; min-width: 180px; }
+        .team-info { flex: 1; min-width: 200px; }
         .team-name-big {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.15rem;
@@ -259,15 +259,18 @@
             color: var(--muted);
             letter-spacing: 1px;
             text-transform: uppercase;
-            border: 1px solid transparent;
-            background: transparent;
+            border: 1px solid var(--border);
+            background: var(--surface);
             outline: none;
             width: 100%;
             padding: 4px 6px;
             border-radius: 4px;
             font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            margin-top: 4px;
         }
-        .team-race:focus { background: #ffffff; border-color: var(--border); }
+        .team-race:focus { background: #ffffff; border-color: var(--accent); }
+        .team-race option { background: #ffffff; color: var(--text); }
 
         .team-header-extras {
             display: flex;
@@ -673,7 +676,18 @@
             <div class="team-badge" style="color:var(--accent)">FDL</div>
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Fer de Lance" oninput="onTeamNameChange(0,this.value)">
-                <input class="team-race" type="text" placeholder="Race / Faction" value="Humans — Corp Terrien" oninput="scheduleSave()">
+                <select class="team-race" onchange="onTeamRaceChange(0)">
+                    <option value="Humans — Corp Terrien" selected>Humans — Corp Terrien</option>
+                    <option value="Orx & Goblins">Orx & Goblins</option>
+                    <option value="Forge Fathers">Forge Fathers</option>
+                    <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                    <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
+                    <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                    <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                    <option value="Asterians">Asterians</option>
+                    <option value="Teratons">Teratons</option>
+                    <option value="Z'zor">Z'zor</option>
+                </select>
             </div>
             <div class="team-header-extras">
                 <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
@@ -710,7 +724,18 @@
             <div class="team-badge" style="color:var(--accent2)">VN</div>
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Vortex Noir" oninput="onTeamNameChange(1,this.value)">
-                <input class="team-race" type="text" placeholder="Race / Faction" value="Orx & Goblins" oninput="scheduleSave()">
+                <select class="team-race" onchange="onTeamRaceChange(1)">
+                    <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
+                    <option value="Orx & Goblins" selected>Orx & Goblins</option>
+                    <option value="Forge Fathers">Forge Fathers</option>
+                    <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                    <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
+                    <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                    <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                    <option value="Asterians">Asterians</option>
+                    <option value="Teratons">Teratons</option>
+                    <option value="Z'zor">Z'zor</option>
+                </select>
             </div>
             <div class="team-header-extras">
                 <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
@@ -747,7 +772,18 @@
             <div class="team-badge" style="color:var(--accent3)">GDF</div>
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Griffes de Fer" oninput="onTeamNameChange(2,this.value)">
-                <input class="team-race" type="text" placeholder="Race / Faction" value="Forge Fathers" oninput="scheduleSave()">
+                <select class="team-race" onchange="onTeamRaceChange(2)">
+                    <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
+                    <option value="Orx & Goblins">Orx & Goblins</option>
+                    <option value="Forge Fathers" selected>Forge Fathers</option>
+                    <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                    <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
+                    <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                    <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                    <option value="Asterians">Asterians</option>
+                    <option value="Teratons">Teratons</option>
+                    <option value="Z'zor">Z'zor</option>
+                </select>
             </div>
             <div class="team-header-extras">
                 <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
@@ -784,7 +820,18 @@
             <div class="team-badge" style="color:#7e22ce">NS</div>
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Néons Sauvages" oninput="onTeamNameChange(3,this.value)">
-                <input class="team-race" type="text" placeholder="Race / Faction" value="Yndij — Sauteurs" oninput="scheduleSave()">
+                <select class="team-race" onchange="onTeamRaceChange(3)">
+                    <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
+                    <option value="Orx & Goblins">Orx & Goblins</option>
+                    <option value="Forge Fathers">Forge Fathers</option>
+                    <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                    <option value="Yndij — Sauteurs" selected>Yndij — Sauteurs</option>
+                    <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                    <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                    <option value="Asterians">Asterians</option>
+                    <option value="Teratons">Teratons</option>
+                    <option value="Z'zor">Z'zor</option>
+                </select>
             </div>
             <div class="team-header-extras">
                 <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
@@ -893,7 +940,7 @@
             
             panel.querySelectorAll(`#roster-body-${i} tr`).forEach(tr => {
                 const fields = tr.querySelectorAll('input, select');
-                if (fields.length >= 11) {
+                if (fields.length >= 12) {
                     players.push({
                         nom:    fields[0].value,
                         role:   fields[1].value,
@@ -1002,6 +1049,9 @@
                         const p   = players[pi];
                         const fields = tr.querySelectorAll('input, select');
                         if (!p) return;
+                        if (fields[1]) {
+                            fields[1].innerHTML = window.getRoleOptionsForRace(t.race || '', p.role || '');
+                        }
                         setIfNotFocused(fields[0],  p.nom  || '');
                         setIfNotFocused(fields[1],  p.role || '');
                         setIfNotFocused(fields[2],  p.xp   != null ? p.xp   : 0);
@@ -1086,6 +1136,54 @@
     const TEAM_COLORS = ['#0077b6', '#e63946', '#d97706', '#7e22ce'];
     const TEAM_DEFAULTS_NAMES = ['Fer de Lance', 'Vortex Noir', 'Griffes de Fer', 'Néons Sauvages'];
 
+    /* ─── BASE DE DONNÉES SAISON 2 DREADBALL ─── */
+    const FACTIONS_DATA = {
+        "Humans — Corp Terrien": {
+            "Guard": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 4, comp: "", valeur: 120 },
+            "Jack": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 4, comp: "", valeur: 100 },
+            "Striker": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 5, comp: "", valeur: 110 }
+        },
+        "Orx & Goblins": {
+            "Guard": { mv: 5, str: 3, agi: 5, rap: 5, hab: 5, arm: 4, comp: "Brute", valeur: 130 },
+            "Jack": { mv: 5, str: 4, agi: 4, rap: 4, hab: 5, arm: 4, comp: "", valeur: 105 },
+            "Striker": { mv: 6, str: 5, agi: 3, rap: 3, hab: 4, arm: 5, comp: "Esquiveur", valeur: 115 }
+        },
+        "Forge Fathers": {
+            "Guard": { mv: 4, str: 3, agi: 5, rap: 5, hab: 4, arm: 3, comp: "Imperturbable", valeur: 125 },
+            "Jack": { mv: 4, str: 3, agi: 5, rap: 5, hab: 4, arm: 4, comp: "Imperturbable", valeur: 105 }
+        },
+        "Veer-Myn / Rats": {
+            "Guard": { mv: 6, str: 4, agi: 3, rap: 4, hab: 5, arm: 4, comp: "", valeur: 125 },
+            "Striker": { mv: 6, str: 5, agi: 3, rap: 3, hab: 4, arm: 5, comp: "Queue préhensile", valeur: 120 }
+        },
+        "Yndij — Sauteurs": {
+            "Guard": { mv: 6, str: 4, agi: 3, rap: 4, hab: 4, arm: 4, comp: "", valeur: 135 },
+            "Jack": { mv: 6, str: 4, agi: 3, rap: 4, hab: 4, arm: 4, comp: "", valeur: 115 },
+            "Striker": { mv: 6, str: 4, agi: 3, rap: 4, hab: 4, arm: 5, comp: "", valeur: 130 }
+        },
+        "Robots / Neo-bots": {
+            "Guard": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 4, comp: "Linked", valeur: 120 },
+            "Jack": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 4, comp: "Linked", valeur: 110 },
+            "Striker": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 5, comp: "Linked", valeur: 115 }
+        },
+        "Judwan (Pelgar Mystics)": {
+            "Striker": { mv: 6, str: 5, agi: 3, rap: 3, hab: 3, arm: 5, comp: "Pacifiste, Mains sûres, Feinte", valeur: 140 }
+        },
+        "Asterians": {
+            "Jack": { mv: 6, str: 5, agi: 3, rap: 3, hab: 4, arm: 5, comp: "Fragile", valeur: 100 },
+            "Striker": { mv: 6, str: 5, agi: 3, rap: 3, hab: 4, arm: 5, comp: "Fragile", valeur: 120 }
+        },
+        "Teratons": {
+            "Guard": { mv: 5, str: 3, agi: 4, rap: 4, hab: 4, arm: 3, comp: "Téléportation", valeur: 135 },
+            "Jack": { mv: 5, str: 3, agi: 4, rap: 4, hab: 4, arm: 4, comp: "Téléportation", valeur: 115 }
+        },
+        "Z'zor": {
+            "Guard": { mv: 5, str: 3, agi: 4, rap: 4, hab: 4, arm: 4, comp: "Linked", valeur: 130 },
+            "Jack": { mv: 5, str: 4, agi: 4, rap: 4, hab: 4, arm: 4, comp: "Linked", valeur: 110 },
+            "Striker": { mv: 6, str: 4, agi: 3, rap: 3, hab: 4, arm: 5, comp: "Linked", valeur: 125 }
+        }
+    };
+
     window.getTeamColor = function(name) {
         const idx = Array.from(document.querySelectorAll('.team-name-big'))
                          .findIndex(el => el.value === name || el.placeholder === name);
@@ -1105,6 +1203,62 @@
         updateClassementFromMatches();
         scheduleSave();
     }
+
+    window.getRoleOptionsForRace = function(race, selectedRole) {
+        const faction = FACTIONS_DATA[race];
+        const roles = faction ? Object.keys(faction) : ['Guard', 'Striker', 'Jack'];
+        let html = `<option value="" ${!selectedRole ? 'selected' : ''}>—</option>`;
+        roles.forEach(role => {
+            html += `<option value="${role}" ${selectedRole === role ? 'selected' : ''}>${role}</option>`;
+        });
+        return html;
+    };
+
+    window.onTeamRaceChange = function(teamIdx) {
+        const raceSelect = document.querySelector(`#team-${teamIdx} .team-race`);
+        const race = raceSelect ? raceSelect.value : '';
+        const tbody = document.getElementById(`roster-body-${teamIdx}`);
+        
+        tbody.querySelectorAll('tr').forEach(tr => {
+            const roleSelect = tr.querySelectorAll('select')[0];
+            const currentRole = roleSelect ? roleSelect.value : '';
+            if (roleSelect) {
+                roleSelect.innerHTML = getRoleOptionsForRace(race, currentRole);
+                if (currentRole && FACTIONS_DATA[race] && FACTIONS_DATA[race][currentRole]) {
+                    applyStatsToRow(tr, FACTIONS_DATA[race][currentRole]);
+                }
+            }
+        });
+        calcTotal(teamIdx);
+        scheduleSave();
+    };
+
+    window.applyStatsToRow = function(tr, stats) {
+        const fields = tr.querySelectorAll('input, select');
+        if (fields.length >= 12) {
+            if (stats.mv !== undefined) fields[4].value = stats.mv;
+            if (stats.str !== undefined) fields[5].value = stats.str;
+            if (stats.agi !== undefined) fields[6].value = stats.agi;
+            if (stats.rap !== undefined) fields[7].value = stats.rap;
+            if (stats.hab !== undefined) fields[8].value = stats.hab;
+            if (stats.arm !== undefined) fields[9].value = stats.arm;
+            if (stats.comp !== undefined) fields[10].value = stats.comp;
+            if (stats.valeur !== undefined) fields[11].value = stats.valeur;
+        }
+    };
+
+    window.onPlayerRoleChange = function(selectEl, teamIdx) {
+        const role = selectEl.value;
+        const raceSelect = document.querySelector(`#team-${teamIdx} .team-race`);
+        const race = raceSelect ? raceSelect.value : '';
+        const tr = selectEl.closest('tr');
+        
+        if (FACTIONS_DATA[race] && FACTIONS_DATA[race][role]) {
+            applyStatsToRow(tr, FACTIONS_DATA[race][role]);
+            calcTotal(teamIdx);
+        }
+        scheduleSave();
+    };
 
     window.syncTeamName = function(idx, name) {
         const row = document.querySelectorAll('#classement-body tr')[idx];
@@ -1128,19 +1282,19 @@
         window.playerCounts[teamIdx]++;
         const num = window.playerCounts[teamIdx];
         const tbody = document.getElementById(`roster-body-${teamIdx}`);
+        const raceSelect = document.querySelector(`#team-${teamIdx} .team-race`);
+        const race = raceSelect ? raceSelect.value : '';
         const tr = document.createElement('tr');
         const s = 'oninput="scheduleSave()"';
-        const sc = 'onchange="scheduleSave()"';
+        const sc = `onchange="onPlayerRoleChange(this, ${teamIdx})"`;
+        const roleOptions = getRoleOptionsForRace(race, data.role);
         
         tr.innerHTML = `
             <td class="num-cell">${String(num).padStart(2, '0')}</td>
             <td><input type="text" class="left" value="${data.nom || ''}" placeholder="Nom" ${s} style="min-width:110px"></td>
             <td>
                 <select ${sc} style="min-width:85px">
-                    <option value="" ${!data.role ? 'selected' : ''}>—</option>
-                    <option value="Guard" ${data.role === 'Guard' ? 'selected' : ''}>Guard</option>
-                    <option value="Striker" ${data.role === 'Striker' ? 'selected' : ''}>Striker</option>
-                    <option value="Jack" ${data.role === 'Jack' ? 'selected' : ''}>Jack</option>
+                    ${roleOptions}
                 </select>
             </td>
             <td><input type="number" min="0" value="${data.xp != null ? data.xp : 0}" ${s} style="width:40px"></td>
