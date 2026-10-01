@@ -211,7 +211,7 @@
 
         .team-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 14px;
             margin-bottom: 16px;
             padding: 14px;
@@ -234,432 +234,157 @@
             border: 2px solid currentColor;
             flex-shrink: 0;
             background: var(--surface);
+            margin-top: 4px;
         }
-        .team-info { flex: 1; min-width: 240px; }
+        .team-info { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 8px; }
         .team-name-big {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text);
             border: 1px solid transparent;
             background: transparent;
             outline: none;
             width: 100%;
-            padding: 4px 6px;
+            padding: 2px 6px;
             border-radius: 4px;
         }
-        .team-name-big:focus {
-            background: #ffffff;
-            border-color: var(--accent);
+        .team-name-big:focus { background: #ffffff; border-color: var(--accent); }
+        
+        /* ── NOUVELLE MISE EN PAGE : RACE & STAFF D'ÉQUIPE ── */
+        .race-staff-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .race-wrapper {
+            display: flex; align-items: center; gap: 8px;
+            background: #ffffff; border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; flex: 1; min-width: 200px;
+        }
+        .race-label { font-size: 10px; text-transform: uppercase; font-weight: 700; color: var(--accent); font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+        .team-race {
+            flex: 1; font-size: 14px; font-weight: 700; color: var(--text); border: none; background: transparent; outline: none; font-family: 'Rajdhani', sans-serif; cursor: pointer; padding: 4px 0;
         }
         
-        /* -- NOUVEAU DESIGN POUR LE MENU RACE -- */
-        .race-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 6px;
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 4px 10px;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+        .staff-wrapper {
+            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+            background: #ffffff; border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px;
         }
-        .race-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
+        .staff-item {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; font-family: 'Orbitron', sans-serif;
         }
-        .team-race {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text);
-            border: none;
-            background: transparent;
-            outline: none;
-            font-family: 'Rajdhani', sans-serif;
-            cursor: pointer;
-            padding: 4px 0;
+        .staff-item span { color: var(--accent); font-size: 8px; margin-left: -2px; }
+        .staff-item input {
+            width: 38px; height: 26px; border: 1px solid var(--border); border-radius: 4px; text-align: center; font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); outline: none; background: var(--surface2);
         }
-        .team-race option { background: #ffffff; color: var(--text); }
+        .staff-item input:focus { border-color: var(--accent); background: #ffffff; }
 
         .team-header-extras {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-left: auto;
+            display: flex; gap: 12px; align-items: center; margin-left: auto;
         }
-        .header-field, .footer-field {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+        .header-field { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .header-field label { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-family: 'Orbitron', sans-serif; font-weight: 700; }
+        .header-field input {
+            width: 55px; min-height: 38px; background: #ffffff; border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; text-align: center; padding: 4px; outline: none;
         }
-        .header-field label, .footer-field label {
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--muted);
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-        }
-        .header-field input, .footer-field input {
-            width: 60px;
-            min-height: 40px;
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            text-align: center;
-            padding: 4px;
-            outline: none;
-        }
-        .header-field input:focus, .footer-field input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+        .header-field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1); }
+        
+        .total-field input {
+            border-color: var(--accent3) !important; color: var(--accent3) !important; background: rgba(217, 119, 6, 0.05) !important; width: 75px !important; font-size: 1.15rem !important;
         }
 
         /* Responsive Table Wrappers */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-bottom: 14px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-        }
-
-        .data-table, .classement-table, .match-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 14px; border-radius: 6px; border: 1px solid var(--border); }
+        .data-table, .classement-table, .match-table { width: 100%; border-collapse: collapse; font-size: 14px; }
         
-        thead tr {
-            background: var(--surface2);
-            border-bottom: 2px solid var(--border);
-        }
-        th {
-            padding: 10px 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-align: center;
-            white-space: nowrap;
-        }
-        tbody tr {
-            border-bottom: 1px solid var(--border);
-        }
+        thead tr { background: var(--surface2); border-bottom: 2px solid var(--border); }
+        th { padding: 10px 8px; font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); text-align: center; white-space: nowrap; }
+        tbody tr { border-bottom: 1px solid var(--border); }
         tbody tr:last-child { border-bottom: none; }
         tbody tr:hover { background: var(--surface2); }
         
         td { padding: 0; }
         .data-table td input, .data-table td select, .classement-table td input {
-            display: block;
-            width: 100%;
-            padding: 8px 6px;
-            min-height: 40px;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: var(--text);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            outline: none;
-            text-align: center;
-            min-width: 36px;
+            display: block; width: 100%; padding: 8px 6px; min-height: 40px; background: transparent; border: 1px solid transparent; border-radius: 4px; color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600; outline: none; text-align: center; min-width: 36px;
         }
-        .data-table td select {
-            cursor: pointer;
-            color: var(--accent);
-            font-weight: 700;
-        }
-        .data-table td select option {
-            background: #ffffff;
-            color: var(--text);
-        }
+        .data-table td select { cursor: pointer; color: var(--accent); font-weight: 700; }
+        .data-table td select option { background: #ffffff; color: var(--text); }
         .data-table td input.left { text-align: left; }
-        .data-table td input:focus, .data-table td select:focus, .classement-table td input:focus {
-            background: #ffffff;
-            border-color: var(--accent);
-        }
+        .data-table td input:focus, .data-table td select:focus, .classement-table td input:focus { background: #ffffff; border-color: var(--accent); }
         
-        .num-cell {
-            padding: 8px 6px !important;
-            color: var(--muted);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            text-align: center;
-        }
+        .num-cell { padding: 8px 6px !important; color: var(--muted); font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; text-align: center; }
 
         /* Boutons d'action */
         .add-row-btn {
-            margin-top: 4px;
-            padding: 12px 20px;
-            min-height: 44px;
-            background: var(--surface2);
-            border: 1px dashed var(--border);
-            border-radius: 6px;
-            color: var(--muted);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            width: 100%;
+            margin-top: 4px; padding: 12px 20px; min-height: 44px; background: var(--surface2); border: 1px dashed var(--border); border-radius: 6px; color: var(--muted); font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; text-transform: uppercase; width: 100%;
         }
-        .add-row-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 119, 182, 0.05);
-        }
+        .add-row-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 119, 182, 0.05); }
         
-        .delete-btn {
-            background: transparent;
-            border: none;
-            color: #94a3b8;
-            cursor: pointer;
-            font-size: 16px;
-            padding: 10px 8px;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
+        .delete-btn { background: transparent; border: none; color: #94a3b8; cursor: pointer; font-size: 16px; padding: 10px 8px; min-height: 44px; display: flex; align-items: center; justify-content: center; width: 100%; }
         .delete-btn:hover { color: var(--accent2); }
-
-        /* Pied de page d'équipe */
-        .team-footer {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-            padding: 14px;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .footer-field { flex: 1; min-width: 110px; }
-        .footer-field label span { display: block; color: var(--accent); font-size: 10px; margin-top: 2px; }
-        .footer-field input { width: 80px; font-size: 1.1rem; }
-        .footer-field.total input {
-            color: var(--text);
-            border-color: var(--accent3);
-            background: rgba(217, 119, 6, 0.05);
-            font-size: 1.2rem;
-            width: 110px;
-        }
 
         /* Classement */
         .classement-table th:first-child, .classement-table th:nth-child(2) { text-align: left; }
         .classement-table td { padding: 6px 8px; text-align: center; }
         .classement-table td:first-child, .classement-table td:nth-child(2) { text-align: left; }
+        .classement-table tbody tr.leader { background: #ffffff; border-left: 4px solid var(--accent); box-shadow: var(--shadow); }
         
-        .classement-table tbody tr.leader {
-            background: #ffffff;
-            border-left: 4px solid var(--accent);
-            box-shadow: var(--shadow);
-        }
-        
-        .rank {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 900;
-            color: var(--muted);
-        }
+        .rank { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 900; color: var(--muted); }
         .rank-1 { color: var(--accent3); }
         .rank-2 { color: #94a3b8; }
         .rank-3 { color: #b45309; }
         
-        .team-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-        .pts-cell input {
-            font-family: 'Orbitron', sans-serif !important;
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-            color: var(--accent) !important;
-            background: transparent;
-        }
+        .team-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+        .pts-cell input { font-family: 'Orbitron', sans-serif !important; font-size: 1rem !important; font-weight: 700 !important; color: var(--accent) !important; background: transparent; }
 
         .sort-btn {
-            margin-top: 12px;
-            padding: 12px 20px;
-            min-height: 44px;
-            background: #ffffff;
-            border: 1px solid var(--accent);
-            border-radius: 6px;
-            color: var(--accent);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            width: 100%;
+            flex: 1; padding: 12px 20px; min-height: 44px; background: #ffffff; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; text-transform: uppercase;
         }
-        .sort-btn:hover {
-            background: var(--accent);
-            color: #ffffff;
-        }
+        .sort-btn:hover { background: var(--accent); color: #ffffff; }
 
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 35px 0;
-        }
+        .divider { height: 1px; background: var(--border); margin: 35px 0; }
 
         /* Matchs */
         .match-table th { text-align: left; }
-        .match-table td select {
-            display: block;
-            width: 100%;
-            padding: 10px 6px;
-            min-height: 44px;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            outline: none;
-            cursor: pointer;
-        }
+        .match-table td select { display: block; width: 100%; padding: 10px 6px; min-height: 44px; background: transparent; border: 1px solid transparent; border-radius: 4px; font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; outline: none; cursor: pointer; }
         .match-table td select option { background: #ffffff; color: var(--text); }
         
         .score-cell { text-align: center; padding: 6px 2px !important; }
-        .score-sep {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: var(--muted);
-            text-align: center;
-            padding: 0 !important;
-            vertical-align: middle;
-        }
-        .score-input {
-            width: 42px !important;
-            min-height: 40px !important;
-            background: #ffffff !important;
-            border: 1px solid var(--border) !important;
-            border-radius: 4px;
-            color: var(--text) !important;
-            font-family: 'Orbitron', sans-serif !important;
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-            text-align: center !important;
-            padding: 4px 2px !important;
-            outline: none;
-        }
+        .score-sep { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--muted); text-align: center; padding: 0 !important; vertical-align: middle; }
+        .score-input { width: 42px !important; min-height: 40px !important; background: #ffffff !important; border: 1px solid var(--border) !important; border-radius: 4px; color: var(--text) !important; font-family: 'Orbitron', sans-serif !important; font-size: 1rem !important; font-weight: 700 !important; text-align: center !important; padding: 4px 2px !important; outline: none; }
         
-        .match-num {
-            padding: 10px 6px !important;
-            color: var(--muted);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            text-align: center;
-        }
+        .match-num { padding: 10px 6px !important; color: var(--muted); font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; text-align: center; }
         
-        .match-status {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 32px;
-            padding: 4px 10px;
-            font-size: 10px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            border-radius: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Rajdhani', sans-serif;
-            white-space: nowrap;
-        }
+        .match-status { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 4px 10px; font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; border-radius: 16px; font-weight: 700; cursor: pointer; font-family: 'Rajdhani', sans-serif; white-space: nowrap; }
         .ms-programme { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
         .ms-joue { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
         .ms-reporte { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
         
         .match-status-td { padding: 6px 6px !important; text-align: center; }
 
-        /* ─── OPTIMISATIONS MOBILES SPÉCIFIQUES ─── */
+        /* ─── OPTIMISATIONS MOBILES ─── */
         @media (max-width: 768px) {
-            input, select, textarea {
-                font-size: 16px !important;
-            }
-
+            input, select, textarea { font-size: 16px !important; }
             .card { padding: 12px; border-radius: 8px; }
             
-            .team-header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-            }
+            .team-header { flex-direction: column; align-items: stretch; gap: 10px; }
+            .race-staff-row { flex-direction: column; align-items: stretch; }
+            .staff-wrapper { justify-content: space-between; }
             .team-header-extras {
-                margin-left: 0;
-                justify-content: space-around;
-                width: 100%;
-                border-top: 1px solid var(--border);
-                padding-top: 10px;
+                margin-left: 0; justify-content: space-between; width: 100%; border-top: 1px solid var(--border); padding-top: 10px; gap: 8px;
             }
+            .header-field input { width: 100%; min-width: 60px; }
+            .total-field input { width: 100%; }
             
-            .data-table th:nth-child(1), .data-table td:nth-child(1) {
-                position: sticky;
-                left: 0;
-                background: var(--surface2);
-                z-index: 2;
-                width: 32px;
-            }
+            .data-table th:nth-child(1), .data-table td:nth-child(1) { position: sticky; left: 0; background: var(--surface2); z-index: 2; width: 32px; }
             .data-table td:nth-child(1) { background: var(--surface); }
-
-            .data-table th:nth-child(2), .data-table td:nth-child(2) {
-                position: sticky;
-                left: 32px;
-                background: var(--surface2);
-                z-index: 2;
-                border-right: 2px solid var(--border);
-                box-shadow: 2px 0 4px rgba(0,0,0,0.05);
-            }
+            .data-table th:nth-child(2), .data-table td:nth-child(2) { position: sticky; left: 32px; background: var(--surface2); z-index: 2; border-right: 2px solid var(--border); box-shadow: 2px 0 4px rgba(0,0,0,0.05); }
             .data-table td:nth-child(2) { background: var(--surface); }
-
-            .team-footer {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 12px;
-            }
-            .footer-field.total {
-                grid-column: span 2;
-                border-top: 1px solid var(--border);
-                padding-top: 8px;
-            }
-            .footer-field.total input { width: 100%; }
 
             .match-table th, .match-table td { padding: 4px 2px !important; }
             .match-table td select { font-size: 14px !important; padding: 4px 2px; }
             .score-input { width: 36px !important; }
+            .sort-btn-group { flex-direction: column; }
         }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -689,26 +414,44 @@
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Fer de Lance" oninput="onTeamNameChange(0,this.value)">
                 
-                <!-- NOUVEL AFFICHAGE DU CHOIX DE RACE -->
-                <div class="race-wrapper">
-                    <span class="race-label">Faction :</span>
-                    <select class="team-race" onchange="onTeamRaceChange(0)">
-                        <option value="Humans — Corp Terrien" selected>Humans — Corp Terrien</option>
-                        <option value="Orx & Goblins">Orx & Goblins</option>
-                        <option value="Forge Fathers">Forge Fathers</option>
-                        <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
-                        <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
-                        <option value="Robots / Neo-bots">Robots / Neo-bots</option>
-                        <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
-                        <option value="Asterians">Asterians</option>
-                        <option value="Teratons">Teratons</option>
-                        <option value="Z'zor">Z'zor</option>
-                    </select>
+                <!-- NOUVEL AFFICHAGE CRÉATION D'ÉQUIPE -->
+                <div class="race-staff-row">
+                    <div class="race-wrapper">
+                        <span class="race-label">Faction</span>
+                        <select class="team-race" onchange="onTeamRaceChange(0)">
+                            <option value="Humans — Corp Terrien" selected>Humans — Corp Terrien</option>
+                            <option value="Orx & Goblins">Orx & Goblins</option>
+                            <option value="Forge Fathers">Forge Fathers</option>
+                            <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                            <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
+                            <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                            <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                            <option value="Asterians">Asterians</option>
+                            <option value="Teratons">Teratons</option>
+                            <option value="Z'zor">Z'zor</option>
+                        </select>
+                    </div>
+                    <div class="staff-wrapper">
+                        <div class="staff-item">Dés <span title="50 MC">(50)</span><input class="inp-des-entr" type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
+                        <div class="staff-item">Cartes <span title="75 MC">(75)</span><input class="inp-cartes-entr" type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
+                        <div class="staff-item">Coach <span title="80 MC">(80)</span><input class="inp-coach" type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
+                        <div class="staff-item">Pom-Pom <span title="80 MC">(80)</span><input class="inp-pompom" type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
+                    </div>
                 </div>
             </div>
             <div class="team-header-extras">
-                <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
-                <div class="header-field"><label>Cartes</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
+                <div class="header-field total-field">
+                    <label>Valeur Totale</label>
+                    <input class="inp-total" id="total-0" type="number" readonly value="0">
+                </div>
+                <div class="header-field">
+                    <label>Dés Match</label>
+                    <input class="inp-des-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
+                <div class="header-field">
+                    <label>Cartes Match</label>
+                    <input class="inp-cartes-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -725,14 +468,6 @@
             </table>
         </div>
         <button class="add-row-btn" onclick="addPlayer(0,null,true)">+ Ajouter un joueur</button>
-        
-        <div class="team-footer">
-            <div class="footer-field"><label>Dés d'entraînement<span>50 MC / dé</span></label><input type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
-            <div class="footer-field"><label>Cartes<span>75 MC / carte</span></label><input type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
-            <div class="footer-field"><label>Coach assistant<span>80 MC / coach</span></label><input type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
-            <div class="footer-field"><label>Pom-Pom Girls<span>80 MC / girls</span></label><input type="number" min="0" value="0" oninput="calcTotal(0);scheduleSave()"></div>
-            <div class="footer-field total"><label>Valeur totale<span>Rang d'équipe</span></label><input type="number" min="0" value="0" readonly id="total-0"></div>
-        </div>
     </div>
 
     <!-- Équipe 1 -->
@@ -742,26 +477,43 @@
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Vortex Noir" oninput="onTeamNameChange(1,this.value)">
                 
-                <!-- NOUVEL AFFICHAGE DU CHOIX DE RACE -->
-                <div class="race-wrapper">
-                    <span class="race-label">Faction :</span>
-                    <select class="team-race" onchange="onTeamRaceChange(1)">
-                        <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
-                        <option value="Orx & Goblins" selected>Orx & Goblins</option>
-                        <option value="Forge Fathers">Forge Fathers</option>
-                        <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
-                        <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
-                        <option value="Robots / Neo-bots">Robots / Neo-bots</option>
-                        <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
-                        <option value="Asterians">Asterians</option>
-                        <option value="Teratons">Teratons</option>
-                        <option value="Z'zor">Z'zor</option>
-                    </select>
+                <div class="race-staff-row">
+                    <div class="race-wrapper">
+                        <span class="race-label">Faction</span>
+                        <select class="team-race" onchange="onTeamRaceChange(1)">
+                            <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
+                            <option value="Orx & Goblins" selected>Orx & Goblins</option>
+                            <option value="Forge Fathers">Forge Fathers</option>
+                            <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                            <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
+                            <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                            <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                            <option value="Asterians">Asterians</option>
+                            <option value="Teratons">Teratons</option>
+                            <option value="Z'zor">Z'zor</option>
+                        </select>
+                    </div>
+                    <div class="staff-wrapper">
+                        <div class="staff-item">Dés <span title="50 MC">(50)</span><input class="inp-des-entr" type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
+                        <div class="staff-item">Cartes <span title="75 MC">(75)</span><input class="inp-cartes-entr" type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
+                        <div class="staff-item">Coach <span title="80 MC">(80)</span><input class="inp-coach" type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
+                        <div class="staff-item">Pom-Pom <span title="80 MC">(80)</span><input class="inp-pompom" type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
+                    </div>
                 </div>
             </div>
             <div class="team-header-extras">
-                <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
-                <div class="header-field"><label>Cartes</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
+                <div class="header-field total-field">
+                    <label>Valeur Totale</label>
+                    <input class="inp-total" id="total-1" type="number" readonly value="0">
+                </div>
+                <div class="header-field">
+                    <label>Dés Match</label>
+                    <input class="inp-des-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
+                <div class="header-field">
+                    <label>Cartes Match</label>
+                    <input class="inp-cartes-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -778,14 +530,6 @@
             </table>
         </div>
         <button class="add-row-btn" onclick="addPlayer(1,null,true)">+ Ajouter un joueur</button>
-        
-        <div class="team-footer">
-            <div class="footer-field"><label>Dés d'entraînement<span>50 MC / dé</span></label><input type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
-            <div class="footer-field"><label>Cartes<span>75 MC / carte</span></label><input type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
-            <div class="footer-field"><label>Coach assistant<span>80 MC / coach</span></label><input type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
-            <div class="footer-field"><label>Pom-Pom Girls<span>80 MC / girls</span></label><input type="number" min="0" value="0" oninput="calcTotal(1);scheduleSave()"></div>
-            <div class="footer-field total"><label>Valeur totale<span>Rang d'équipe</span></label><input type="number" min="0" value="0" readonly id="total-1"></div>
-        </div>
     </div>
 
     <!-- Équipe 2 -->
@@ -795,26 +539,43 @@
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Griffes de Fer" oninput="onTeamNameChange(2,this.value)">
                 
-                <!-- NOUVEL AFFICHAGE DU CHOIX DE RACE -->
-                <div class="race-wrapper">
-                    <span class="race-label">Faction :</span>
-                    <select class="team-race" onchange="onTeamRaceChange(2)">
-                        <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
-                        <option value="Orx & Goblins">Orx & Goblins</option>
-                        <option value="Forge Fathers" selected>Forge Fathers</option>
-                        <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
-                        <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
-                        <option value="Robots / Neo-bots">Robots / Neo-bots</option>
-                        <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
-                        <option value="Asterians">Asterians</option>
-                        <option value="Teratons">Teratons</option>
-                        <option value="Z'zor">Z'zor</option>
-                    </select>
+                <div class="race-staff-row">
+                    <div class="race-wrapper">
+                        <span class="race-label">Faction</span>
+                        <select class="team-race" onchange="onTeamRaceChange(2)">
+                            <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
+                            <option value="Orx & Goblins">Orx & Goblins</option>
+                            <option value="Forge Fathers" selected>Forge Fathers</option>
+                            <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                            <option value="Yndij — Sauteurs">Yndij — Sauteurs</option>
+                            <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                            <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                            <option value="Asterians">Asterians</option>
+                            <option value="Teratons">Teratons</option>
+                            <option value="Z'zor">Z'zor</option>
+                        </select>
+                    </div>
+                    <div class="staff-wrapper">
+                        <div class="staff-item">Dés <span title="50 MC">(50)</span><input class="inp-des-entr" type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
+                        <div class="staff-item">Cartes <span title="75 MC">(75)</span><input class="inp-cartes-entr" type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
+                        <div class="staff-item">Coach <span title="80 MC">(80)</span><input class="inp-coach" type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
+                        <div class="staff-item">Pom-Pom <span title="80 MC">(80)</span><input class="inp-pompom" type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
+                    </div>
                 </div>
             </div>
             <div class="team-header-extras">
-                <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
-                <div class="header-field"><label>Cartes</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
+                <div class="header-field total-field">
+                    <label>Valeur Totale</label>
+                    <input class="inp-total" id="total-2" type="number" readonly value="0">
+                </div>
+                <div class="header-field">
+                    <label>Dés Match</label>
+                    <input class="inp-des-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
+                <div class="header-field">
+                    <label>Cartes Match</label>
+                    <input class="inp-cartes-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -831,14 +592,6 @@
             </table>
         </div>
         <button class="add-row-btn" onclick="addPlayer(2,null,true)">+ Ajouter un joueur</button>
-        
-        <div class="team-footer">
-            <div class="footer-field"><label>Dés d'entraînement<span>50 MC / dé</span></label><input type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
-            <div class="footer-field"><label>Cartes<span>75 MC / carte</span></label><input type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
-            <div class="footer-field"><label>Coach assistant<span>80 MC / coach</span></label><input type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
-            <div class="footer-field"><label>Pom-Pom Girls<span>80 MC / girls</span></label><input type="number" min="0" value="0" oninput="calcTotal(2);scheduleSave()"></div>
-            <div class="footer-field total"><label>Valeur totale<span>Rang d'équipe</span></label><input type="number" min="0" value="0" readonly id="total-2"></div>
-        </div>
     </div>
 
     <!-- Équipe 3 -->
@@ -848,26 +601,43 @@
             <div class="team-info">
                 <input class="team-name-big" type="text" placeholder="Nom de l'équipe" value="Néons Sauvages" oninput="onTeamNameChange(3,this.value)">
                 
-                <!-- NOUVEL AFFICHAGE DU CHOIX DE RACE -->
-                <div class="race-wrapper">
-                    <span class="race-label">Faction :</span>
-                    <select class="team-race" onchange="onTeamRaceChange(3)">
-                        <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
-                        <option value="Orx & Goblins">Orx & Goblins</option>
-                        <option value="Forge Fathers">Forge Fathers</option>
-                        <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
-                        <option value="Yndij — Sauteurs" selected>Yndij — Sauteurs</option>
-                        <option value="Robots / Neo-bots">Robots / Neo-bots</option>
-                        <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
-                        <option value="Asterians">Asterians</option>
-                        <option value="Teratons">Teratons</option>
-                        <option value="Z'zor">Z'zor</option>
-                    </select>
+                <div class="race-staff-row">
+                    <div class="race-wrapper">
+                        <span class="race-label">Faction</span>
+                        <select class="team-race" onchange="onTeamRaceChange(3)">
+                            <option value="Humans — Corp Terrien">Humans — Corp Terrien</option>
+                            <option value="Orx & Goblins">Orx & Goblins</option>
+                            <option value="Forge Fathers">Forge Fathers</option>
+                            <option value="Veer-Myn / Rats">Veer-Myn / Rats</option>
+                            <option value="Yndij — Sauteurs" selected>Yndij — Sauteurs</option>
+                            <option value="Robots / Neo-bots">Robots / Neo-bots</option>
+                            <option value="Judwan (Pelgar Mystics)">Judwan (Pelgar Mystics)</option>
+                            <option value="Asterians">Asterians</option>
+                            <option value="Teratons">Teratons</option>
+                            <option value="Z'zor">Z'zor</option>
+                        </select>
+                    </div>
+                    <div class="staff-wrapper">
+                        <div class="staff-item">Dés <span title="50 MC">(50)</span><input class="inp-des-entr" type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
+                        <div class="staff-item">Cartes <span title="75 MC">(75)</span><input class="inp-cartes-entr" type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
+                        <div class="staff-item">Coach <span title="80 MC">(80)</span><input class="inp-coach" type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
+                        <div class="staff-item">Pom-Pom <span title="80 MC">(80)</span><input class="inp-pompom" type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
+                    </div>
                 </div>
             </div>
             <div class="team-header-extras">
-                <div class="header-field"><label>Dés</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
-                <div class="header-field"><label>Cartes</label><input type="number" min="0" value="0" oninput="scheduleSave()"></div>
+                <div class="header-field total-field">
+                    <label>Valeur Totale</label>
+                    <input class="inp-total" id="total-3" type="number" readonly value="0">
+                </div>
+                <div class="header-field">
+                    <label>Dés Match</label>
+                    <input class="inp-des-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
+                <div class="header-field">
+                    <label>Cartes Match</label>
+                    <input class="inp-cartes-match" type="number" min="0" value="0" oninput="scheduleSave()">
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -884,14 +654,6 @@
             </table>
         </div>
         <button class="add-row-btn" onclick="addPlayer(3,null,true)">+ Ajouter un joueur</button>
-        
-        <div class="team-footer">
-            <div class="footer-field"><label>Dés d'entraînement<span>50 MC / dé</span></label><input type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
-            <div class="footer-field"><label>Cartes<span>75 MC / carte</span></label><input type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
-            <div class="footer-field"><label>Coach assistant<span>80 MC / coach</span></label><input type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
-            <div class="footer-field"><label>Pom-Pom Girls<span>80 MC / girls</span></label><input type="number" min="0" value="0" oninput="calcTotal(3);scheduleSave()"></div>
-            <div class="footer-field total"><label>Valeur totale<span>Rang d'équipe</span></label><input type="number" min="0" value="0" readonly id="total-3"></div>
-        </div>
     </div>
 
     <div class="divider"></div>
@@ -909,7 +671,10 @@
                 <tbody id="classement-body"></tbody>
             </table>
         </div>
-        <button class="sort-btn" onclick="sortClassement()">⬡ Trier par Valeur MC</button>
+        <div class="sort-btn-group" style="display:flex; gap:10px; margin-top:12px;">
+            <button class="sort-btn" onclick="sortClassement()">⬡ Trier par Points</button>
+            <button class="sort-btn" onclick="sortClassementByMC()">⬡ Trier par Valeur MC</button>
+        </div>
     </div>
 
     <div class="divider"></div>
@@ -966,8 +731,6 @@
 
         for (let i = 0; i < 4; i++) {
             const panel  = document.getElementById(`team-${i}`);
-            const hInp   = panel.querySelectorAll('.header-field input');
-            const fInp   = panel.querySelectorAll('.team-footer input[type="number"]');
             const players = [];
             
             panel.querySelectorAll(`#roster-body-${i} tr`).forEach(tr => {
@@ -993,12 +756,12 @@
             state.teams[i] = {
                 name:      panel.querySelector('.team-name-big').value,
                 race:      panel.querySelector('.team-race').value,
-                des:       Number(hInp[0]?.value) || 0,
-                cartes:    Number(hInp[1]?.value) || 0,
-                des_entr:  Number(fInp[0]?.value) || 0,
-                cart_entr: Number(fInp[1]?.value) || 0,
-                coach:     Number(fInp[2]?.value) || 0,
-                pompom:    Number(fInp[3]?.value) || 0,
+                des:       Number(panel.querySelector('.inp-des-match').value) || 0,
+                cartes:    Number(panel.querySelector('.inp-cartes-match').value) || 0,
+                des_entr:  Number(panel.querySelector('.inp-des-entr').value) || 0,
+                cart_entr: Number(panel.querySelector('.inp-cartes-entr').value) || 0,
+                coach:     Number(panel.querySelector('.inp-coach').value) || 0,
+                pompom:    Number(panel.querySelector('.inp-pompom').value) || 0,
                 players:   players
             };
         }
@@ -1054,15 +817,12 @@
                 setIfNotFocused(panel.querySelector('.team-race'), t.race || '');
                 document.getElementById(`tabBtn${i}`).textContent = `⬡ ${t.name || `Équipe ${i+1}`}`;
 
-                const hInp = panel.querySelectorAll('.header-field input');
-                setIfNotFocused(hInp[0], t.des    || 0);
-                setIfNotFocused(hInp[1], t.cartes || 0);
-                
-                const fInp = panel.querySelectorAll('.team-footer input[type="number"]:not([readonly])');
-                setIfNotFocused(fInp[0], t.des_entr  || 0);
-                setIfNotFocused(fInp[1], t.cart_entr || 0);
-                setIfNotFocused(fInp[2], t.coach     || 0);
-                setIfNotFocused(fInp[3], t.pompom    || 0);
+                setIfNotFocused(panel.querySelector('.inp-des-match'), t.des || 0);
+                setIfNotFocused(panel.querySelector('.inp-cartes-match'), t.cartes || 0);
+                setIfNotFocused(panel.querySelector('.inp-des-entr'), t.des_entr || 0);
+                setIfNotFocused(panel.querySelector('.inp-cartes-entr'), t.cart_entr || 0);
+                setIfNotFocused(panel.querySelector('.inp-coach'), t.coach || 0);
+                setIfNotFocused(panel.querySelector('.inp-pompom'), t.pompom || 0);
 
                 const players = t.players ? (Array.isArray(t.players) ? t.players : Object.keys(t.players).sort((a,b)=>+a-+b).map(k=>t.players[k])) : [];
                 const tbody = document.getElementById(`roster-body-${i}`);
@@ -1293,7 +1053,8 @@
     };
 
     window.syncTeamName = function(idx, name) {
-        const row = document.querySelectorAll('#classement-body tr')[idx];
+        // CORRECTION BUG : on cible la ligne grâce à data-team-idx, peu importe sa position visuelle suite au tri
+        const row = document.querySelector(`#classement-body tr[data-team-idx="${idx}"]`);
         if (row) { 
             const s = row.querySelector('strong'); 
             if(s) s.textContent = name; 
@@ -1360,12 +1121,11 @@
     }
 
     window.calcTotal = function calcTotal(teamIdx) {
-        const footer = document.querySelector(`#team-${teamIdx} .team-footer`);
-        const allFooterInp = footer.querySelectorAll('input[type="number"]:not([readonly])');
-        const des    = Number(allFooterInp[0]?.value) || 0;
-        const cartes = Number(allFooterInp[1]?.value) || 0;
-        const coach  = Number(allFooterInp[2]?.value) || 0;
-        const pompom = Number(allFooterInp[3]?.value) || 0;
+        const panel = document.getElementById(`team-${teamIdx}`);
+        const des    = Number(panel.querySelector('.inp-des-entr').value) || 0;
+        const cartes = Number(panel.querySelector('.inp-cartes-entr').value) || 0;
+        const coach  = Number(panel.querySelector('.inp-coach').value) || 0;
+        const pompom = Number(panel.querySelector('.inp-pompom').value) || 0;
         
         let sum = 0;
         document.getElementById(`roster-body-${teamIdx}`).querySelectorAll('tr').forEach(tr => {
@@ -1492,29 +1252,21 @@
         updateClassementFromMatches();
     }
 
-    window.recalcRow = function(input) {
-        const tr  = input.closest('tr');
-        const ins = tr.querySelectorAll('input[type="number"]');
-        const pp  = Number(ins[4]?.value) || 0;
-        const pm  = Number(ins[5]?.value) || 0;
-        const diff = pp - pm;
-        const td8 = tr.querySelector('.diff-cell') || tr.querySelectorAll('td')[8];
-        td8.textContent = (diff >= 0 ? '+' : '') + diff;
-        td8.style.color = diff >= 0 ? 'var(--accent)' : 'var(--accent2)';
-    };
-
     window.sortClassement = function() {
         const tbody = document.getElementById('classement-body');
         const rows  = Array.from(tbody.querySelectorAll('tr'));
+        
+        // Tri par défaut : PTS > Différence > Valeur MC
         rows.sort((a,b) => {
-            const mc = r => parseInt(r.querySelector('.mc-val')?.textContent) || 0;
             const p = r => Number(r.querySelectorAll('input[type="number"]')[6]?.value) || 0;
             const diff = r => parseInt(r.querySelector('.diff-cell')?.textContent) || 0;
+            const mc = r => parseInt(r.querySelector('.mc-val')?.textContent) || 0;
             
-            if (mc(b) !== mc(a)) return mc(b) - mc(a);
             if (p(b) !== p(a)) return p(b) - p(a);
-            return diff(b) - diff(a);
+            if (diff(b) !== diff(a)) return diff(b) - diff(a);
+            return mc(b) - mc(a);
         });
+        
         rows.forEach((r,i) => {
             const rank = i + 1;
             const el   = r.querySelector('.rank');
@@ -1525,7 +1277,25 @@
         });
     };
 
-    window.sortClassementByMC = window.sortClassement;
+    window.sortClassementByMC = function() {
+        const tbody = document.getElementById('classement-body');
+        const rows  = Array.from(tbody.querySelectorAll('tr'));
+        
+        // Tri forcé : Valeur MC uniquement
+        rows.sort((a,b) => {
+            const mc = r => parseInt(r.querySelector('.mc-val')?.textContent) || 0;
+            return mc(b) - mc(a);
+        });
+        
+        rows.forEach((r,i) => {
+            const rank = i + 1;
+            const el   = r.querySelector('.rank');
+            el.className   = `rank${rank <= 3 ? ' rank-'+rank : ''}`;
+            el.textContent = rank;
+            r.classList.toggle('leader', rank === 1);
+            tbody.appendChild(r);
+        });
+    };
 
     function buildMatches(phase) {
         const names = Array.from(document.querySelectorAll('.team-name-big')).map((el,i) => el.value || TEAM_DEFAULTS_NAMES[i]);
