@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ligue 2026 — DreadBall</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -11,14 +11,14 @@
             --bg: #f4f6f9;
             --surface: #ffffff;
             --surface2: #f8fafc;
-            --accent: #0077b6;     /* Bleu profond (Fer de Lance) */
-            --accent2: #e63946;    /* Rouge/Rose foncé (Vortex Noir) */
-            --accent3: #d97706;    /* Or/Ambre (Griffes de Fer) */
+            --accent: #0077b6;     /* Bleu profond */
+            --accent2: #e63946;    /* Rouge/Rose */
+            --accent3: #d97706;    /* Ambre/Or */
             --text: #1e293b;       /* Texte sombre */
             --muted: #64748b;      /* Texte secondaire */
-            --border: #cbd5e1;     /* Bordures claires */
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border: #cbd5e1;     /* Bordures */
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,14 +32,14 @@
             overflow-x: hidden;
         }
 
-        /* Image de fond visible avec fondu clair */
+        /* Image de fond */
         .bg-image {
             position: fixed;
             inset: 0;
             background-image: url('dreadball.webp');
             background-size: cover;
             background-position: center top;
-            opacity: 0.35; /* Opacité renforcée */
+            opacity: 0.35;
             z-index: 0;
             pointer-events: none;
         }
@@ -48,7 +48,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center top, rgba(244, 246, 249, 0.1) 0%, rgba(244, 246, 249, 0.5) 60%, #f4f6f9 100%);
+            background: radial-gradient(ellipse at center top, rgba(244, 246, 249, 0.2) 0%, rgba(244, 246, 249, 0.65) 60%, #f4f6f9 100%);
         }
 
         /* Motif grille */
@@ -64,12 +64,12 @@
             z-index: 0;
         }
 
-        /* Indicator de synchro Firebase */
+        /* Témoin de synchro */
         #sync-indicator {
             display: none;
             position: fixed;
-            top: 14px;
-            right: 18px;
+            top: 12px;
+            right: 12px;
             z-index: 100;
             align-items: center;
             gap: 8px;
@@ -100,69 +100,66 @@
         header {
             position: relative;
             text-align: center;
-            padding: 50px 15px 30px;
+            padding: 40px 15px 20px;
             z-index: 1;
         }
         .header-eyebrow {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: var(--accent);
             text-transform: uppercase;
-            margin-bottom: 8px;
-            animation: fadeDown 0.6s ease both;
+            margin-bottom: 6px;
         }
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-size: clamp(2rem, 8vw, 3.8rem);
             font-weight: 900;
             letter-spacing: 1px;
-            line-height: 1;
+            line-height: 1.1;
             color: var(--text);
-            animation: fadeDown 0.6s 0.1s ease both;
         }
         h1 span { color: var(--accent); }
         .header-sub {
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 8px;
+            font-size: 13px;
             font-weight: 600;
             letter-spacing: 2px;
             color: var(--muted);
             text-transform: uppercase;
-            animation: fadeDown 0.6s 0.2s ease both;
         }
 
         main {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 10px 15px 60px;
+            padding: 10px 12px 60px;
             position: relative;
             z-index: 1;
         }
 
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--text);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .section-title::before {
             content: '';
             display: inline-block;
             width: 4px;
-            height: 20px;
+            height: 18px;
             background: var(--accent);
             border-radius: 2px;
         }
 
-        /* Navigation Onglets Mobile First */
+        /* Navigation Onglets */
         .tabs {
             display: flex;
             gap: 8px;
@@ -177,10 +174,10 @@
 
         .tab-btn {
             flex: 0 0 auto;
-            padding: 10px 18px;
+            padding: 12px 18px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--muted);
             font-family: 'Rajdhani', sans-serif;
             font-size: 14px;
@@ -190,11 +187,9 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            min-height: 44px;
         }
-        .tab-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
         .tab-btn.active {
             background: var(--accent);
             color: #ffffff;
@@ -202,27 +197,25 @@
             box-shadow: var(--shadow);
         }
 
-        /* Panneaux d'équipe */
-        .team-panel { display: none; animation: fadeIn 0.3s ease; }
-        .team-panel.active { display: block; }
+        /* Cartes d'équipe */
+        .team-panel { display: none; }
+        .team-panel.active { display: block; animation: fadeIn 0.25s ease; }
         
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             box-shadow: var(--shadow);
-            transition: box-shadow 0.3s ease;
         }
-        .card:hover { box-shadow: var(--shadow-hover); }
 
         .team-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding: 16px;
+            gap: 14px;
+            margin-bottom: 16px;
+            padding: 14px;
             background: var(--surface2);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -230,23 +223,23 @@
             flex-wrap: wrap;
         }
         .team-badge {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 900;
             border: 2px solid currentColor;
             flex-shrink: 0;
             background: var(--surface);
         }
-        .team-info { flex: 1; min-width: 200px; }
+        .team-info { flex: 1; min-width: 180px; }
         .team-name-big {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: var(--text);
             border: 1px solid transparent;
@@ -255,12 +248,10 @@
             width: 100%;
             padding: 4px 6px;
             border-radius: 4px;
-            transition: all 0.2s;
         }
         .team-name-big:focus {
             background: #ffffff;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
         }
         .team-race {
             font-size: 13px;
@@ -274,13 +265,9 @@
             width: 100%;
             padding: 4px 6px;
             border-radius: 4px;
-            transition: all 0.2s;
             font-family: 'Rajdhani', sans-serif;
         }
-        .team-race:focus {
-            background: #ffffff;
-            border-color: var(--border);
-        }
+        .team-race:focus { background: #ffffff; border-color: var(--border); }
 
         .team-header-extras {
             display: flex;
@@ -304,6 +291,7 @@
         }
         .header-field input, .footer-field input {
             width: 60px;
+            min-height: 40px;
             background: #ffffff;
             border: 1px solid var(--border);
             border-radius: 6px;
@@ -312,21 +300,22 @@
             font-size: 1rem;
             font-weight: 700;
             text-align: center;
-            padding: 6px 4px;
+            padding: 4px;
             outline: none;
-            transition: all 0.2s;
         }
         .header-field input:focus, .footer-field input:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
         }
 
-        /* Tables communes */
+        /* Responsive Table Wrappers */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
         }
 
         .data-table, .classement-table, .match-table {
@@ -352,25 +341,24 @@
         }
         tbody tr {
             border-bottom: 1px solid var(--border);
-            transition: background 0.15s;
         }
+        tbody tr:last-child { border-bottom: none; }
         tbody tr:hover { background: var(--surface2); }
         
-        /* Inputs dans les tables */
         td { padding: 0; }
         .data-table td input, .classement-table td input {
             display: block;
             width: 100%;
-            padding: 8px 6px;
+            padding: 10px 6px;
+            min-height: 40px;
             background: transparent;
             border: 1px solid transparent;
             border-radius: 4px;
             color: var(--text);
             font-family: 'Rajdhani', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             outline: none;
-            transition: all 0.15s;
             text-align: center;
             min-width: 36px;
         }
@@ -378,7 +366,6 @@
         .data-table td input:focus, .classement-table td input:focus {
             background: #ffffff;
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.1);
         }
         
         .num-cell {
@@ -390,10 +377,11 @@
             text-align: center;
         }
 
-        /* Boutons */
+        /* Boutons d'action */
         .add-row-btn {
             margin-top: 4px;
-            padding: 10px 20px;
+            padding: 12px 20px;
+            min-height: 44px;
             background: var(--surface2);
             border: 1px dashed var(--border);
             border-radius: 6px;
@@ -418,20 +406,22 @@
             border: none;
             color: #94a3b8;
             cursor: pointer;
-            font-size: 14px;
-            padding: 8px 6px;
-            transition: color 0.2s;
-            display: block;
+            font-size: 16px;
+            padding: 10px 8px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
         }
         .delete-btn:hover { color: var(--accent2); }
 
-        /* Footer équipe */
+        /* Pied de page d'équipe */
         .team-footer {
             display: flex;
             gap: 12px;
             margin-top: 16px;
-            padding: 16px;
+            padding: 14px;
             background: var(--surface2);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -439,7 +429,7 @@
             align-items: center;
         }
         .footer-field { flex: 1; min-width: 110px; }
-        .footer-field label span { display: block; color: var(--accent); font-size: 10px; margin-top: 2px;}
+        .footer-field label span { display: block; color: var(--accent); font-size: 10px; margin-top: 2px; }
         .footer-field input { width: 80px; font-size: 1.1rem; }
         .footer-field.total input {
             color: var(--text);
@@ -449,7 +439,7 @@
             width: 110px;
         }
 
-        /* Table Classement spécifiques */
+        /* Classement */
         .classement-table th:first-child, .classement-table th:nth-child(2) { text-align: left; }
         .classement-table td { padding: 6px 8px; text-align: center; }
         .classement-table td:first-child, .classement-table td:nth-child(2) { text-align: left; }
@@ -462,13 +452,13 @@
         
         .rank {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 900;
             color: var(--muted);
         }
-        .rank-1 { color: var(--accent3); } /* Or */
-        .rank-2 { color: #94a3b8; }      /* Argent */
-        .rank-3 { color: #b45309; }      /* Bronze */
+        .rank-1 { color: var(--accent3); }
+        .rank-2 { color: #94a3b8; }
+        .rank-3 { color: #b45309; }
         
         .team-dot {
             width: 8px;
@@ -487,8 +477,9 @@
         }
 
         .sort-btn {
-            margin-top: 10px;
-            padding: 10px 20px;
+            margin-top: 12px;
+            padding: 12px 20px;
+            min-height: 44px;
             background: #ffffff;
             border: 1px solid var(--accent);
             border-radius: 6px;
@@ -500,25 +491,26 @@
             cursor: pointer;
             transition: all 0.2s;
             text-transform: uppercase;
+            width: 100%;
         }
         .sort-btn:hover {
             background: var(--accent);
             color: #ffffff;
-            box-shadow: var(--shadow);
         }
 
         .divider {
             height: 1px;
             background: var(--border);
-            margin: 40px 0;
+            margin: 35px 0;
         }
 
-        /* Calendrier spécifiques */
+        /* Matchs */
         .match-table th { text-align: left; }
         .match-table td select {
             display: block;
             width: 100%;
-            padding: 10px 8px;
+            padding: 10px 6px;
+            min-height: 44px;
             background: transparent;
             border: 1px solid transparent;
             border-radius: 4px;
@@ -527,11 +519,6 @@
             font-weight: 700;
             outline: none;
             cursor: pointer;
-            transition: all 0.15s;
-        }
-        .match-table td select:hover, .match-table td select:focus {
-            background: #ffffff;
-            border-color: var(--border);
         }
         .match-table td select option { background: #ffffff; color: var(--text); }
         
@@ -545,7 +532,8 @@
             vertical-align: middle;
         }
         .score-input {
-            width: 44px !important;
+            width: 42px !important;
+            min-height: 40px !important;
             background: #ffffff !important;
             border: 1px solid var(--border) !important;
             border-radius: 4px;
@@ -554,36 +542,31 @@
             font-size: 1rem !important;
             font-weight: 700 !important;
             text-align: center !important;
-            padding: 6px 2px !important;
+            padding: 4px 2px !important;
             outline: none;
-            display: inline-block;
-            transition: all 0.2s;
-        }
-        .score-input:focus {
-            border-color: var(--accent) !important;
-            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1) !important;
         }
         
         .match-num {
-            padding: 10px 8px !important;
+            padding: 10px 6px !important;
             color: var(--muted);
             font-family: 'Orbitron', sans-serif;
             font-size: 11px;
             font-weight: 700;
             text-align: center;
-            white-space: nowrap;
         }
         
         .match-status {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 32px;
             padding: 4px 10px;
             font-size: 10px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            border-radius: 20px;
+            border-radius: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
             font-family: 'Rajdhani', sans-serif;
             white-space: nowrap;
         }
@@ -591,18 +574,22 @@
         .ms-joue { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
         .ms-reporte { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
         
-        .match-status-td { padding: 6px 8px !important; text-align: center; }
+        .match-status-td { padding: 6px 6px !important; text-align: center; }
 
-        /* ─── MEDIA QUERIES (ADAPTATION MOBILE) ─── */
+        /* ─── OPTIMISATIONS MOBILES SPÉCIFIQUES (ÉCRANS < 768px) ─── */
         @media (max-width: 768px) {
-            header { padding: 40px 10px 20px; }
-            main { padding: 10px 10px 40px; }
-            .card { padding: 14px; border-radius: 8px; margin-bottom: 20px; }
+            /* Empêcher le zoom auto Safari sur focus des champs */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+
+            .card { padding: 12px; border-radius: 8px; }
             
+            /* En-tête d'équipe empilé */
             .team-header {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 12px;
+                gap: 10px;
             }
             .team-header-extras {
                 margin-left: 0;
@@ -612,10 +599,32 @@
                 padding-top: 10px;
             }
             
+            /* Colonnes fixées à gauche dans le tableau des joueurs */
+            .data-table th:nth-child(1), .data-table td:nth-child(1) {
+                position: sticky;
+                left: 0;
+                background: var(--surface2);
+                z-index: 2;
+                width: 32px;
+            }
+            .data-table td:nth-child(1) { background: var(--surface); }
+
+            .data-table th:nth-child(2), .data-table td:nth-child(2) {
+                position: sticky;
+                left: 32px;
+                background: var(--surface2);
+                z-index: 2;
+                border-right: 2px solid var(--border);
+                box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+            }
+            .data-table td:nth-child(2) { background: var(--surface); }
+
+            /* Grid 2x2 pour le pied de page d'équipe */
             .team-footer {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
+                padding: 12px;
             }
             .footer-field.total {
                 grid-column: span 2;
@@ -623,18 +632,15 @@
                 padding-top: 8px;
             }
             .footer-field.total input { width: 100%; }
-            
+
+            /* Formatage compact des calendriers */
             .match-table th, .match-table td { padding: 4px 2px !important; }
-            .match-table td select { font-size: 13px; padding: 6px 2px; }
-            .score-input { width: 38px !important; font-size: 0.95rem !important; }
+            .match-table td select { font-size: 14px !important; padding: 4px 2px; }
+            .score-input { width: 36px !important; }
         }
 
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -815,7 +821,7 @@
             <table class="classement-table">
                 <thead>
                     <tr>
-                        <th style="width:40px">Rang</th><th>Équipe</th>
+                        <th style="width:30px">Rang</th><th>Équipe</th>
                         <th>MJ</th><th>V</th><th>N</th><th>D</th><th>Pts+</th><th>Pts-</th><th>Diff</th><th>PTS</th><th>Valeur MC</th>
                     </tr>
                 </thead>
@@ -829,11 +835,11 @@
     
     <div class="section-title">Calendrier des Rencontres</div>
     <div style="margin-bottom:10px;font-family:'Orbitron',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-weight:700;">⬡ Phase Aller</div>
-    <div class="card" style="padding:16px;">
+    <div class="card" style="padding:12px;">
         <div class="table-responsive">
             <table class="match-table">
                 <thead>
-                    <tr><th>J.</th><th>Domicile</th><th style="text-align:center;width:30px"></th><th style="text-align:center;width:50px">Score</th><th style="text-align:center;width:30px"></th><th>Extérieur</th><th style="text-align:center">Statut</th></tr>
+                    <tr><th>J.</th><th>Domicile</th><th style="text-align:center;width:20px"></th><th style="text-align:center;width:40px">Score</th><th style="text-align:center;width:20px"></th><th>Extérieur</th><th style="text-align:center">Statut</th></tr>
                 </thead>
                 <tbody id="match-body-aller"></tbody>
             </table>
@@ -841,11 +847,11 @@
     </div>
     
     <div style="margin-bottom:10px;font-family:'Orbitron',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--accent2);text-transform:uppercase;font-weight:700;">⬡ Phase Retour</div>
-    <div class="card" style="padding:16px;">
+    <div class="card" style="padding:12px;">
         <div class="table-responsive">
             <table class="match-table">
                 <thead>
-                    <tr><th>J.</th><th>Domicile</th><th style="text-align:center;width:30px"></th><th style="text-align:center;width:50px">Score</th><th style="text-align:center;width:30px"></th><th>Extérieur</th><th style="text-align:center">Statut</th></tr>
+                    <tr><th>J.</th><th>Domicile</th><th style="text-align:center;width:20px"></th><th style="text-align:center;width:40px">Score</th><th style="text-align:center;width:20px"></th><th>Extérieur</th><th style="text-align:center">Statut</th></tr>
                 </thead>
                 <tbody id="match-body-retour"></tbody>
             </table>
@@ -869,17 +875,14 @@
     const app = initializeApp(firebaseConfig);
     const db  = getDatabase(app);
 
-    // Debounce helper
     function debounce(fn, ms) {
         let t;
         return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
     }
 
-    // Lire toute la page et sauvegarder dans Firebase
     function readPageState() {
         const state = { teams: {}, classement: {}, matches: { aller: {}, retour: {} } };
 
-        // Équipes
         for (let i = 0; i < 4; i++) {
             const panel  = document.getElementById(`team-${i}`);
             const hInp   = panel.querySelectorAll('.header-field input');
@@ -919,7 +922,6 @@
             };
         }
 
-        // Classement
         document.querySelectorAll('#classement-body tr').forEach((tr, i) => {
             const ins = tr.querySelectorAll('input[type="number"]');
             state.classement[i] = {
@@ -933,7 +935,6 @@
             };
         });
 
-        // Matches
         ['aller','retour'].forEach(phase => {
             document.querySelectorAll(`#match-body-${phase} tr`).forEach((tr, i) => {
                 const sels   = tr.querySelectorAll('select');
@@ -961,7 +962,6 @@
     function applyState(state, isInitial) {
         if (!state) return;
 
-        // Équipes
         if (state.teams) {
             Object.keys(state.teams).forEach(idx => {
                 const i = parseInt(idx);
@@ -983,7 +983,6 @@
                 setIfNotFocused(fInp[2], t.coach     || 0);
                 setIfNotFocused(fInp[3], t.pompom    || 0);
 
-                // Joueurs
                 const players = t.players ? (Array.isArray(t.players) ? t.players : Object.keys(t.players).sort((a,b)=>+a-+b).map(k=>t.players[k])) : [];
                 const tbody = document.getElementById(`roster-body-${i}`);
                 const existingRows = tbody.querySelectorAll('tr');
@@ -1020,7 +1019,6 @@
             });
         }
 
-        // Classement
         if (state.classement) {
             Object.keys(state.classement).forEach(idx => {
                 const tr = document.querySelector(`#classement-body tr[data-team-idx="${idx}"]`);
@@ -1038,7 +1036,6 @@
             window.sortClassementByMC();
         }
 
-        // Matches
         if (state.matches) {
             ['aller','retour'].forEach(phase => {
                 if (!state.matches[phase]) return;
@@ -1073,7 +1070,6 @@
         document.getElementById('sync-indicator').style.display = 'flex';
     }
 
-    // Écoute temps réel Firebase
     let firstLoad = true;
     let iAmSaving = false;
 
@@ -1149,19 +1145,19 @@
         
         tr.innerHTML = `
             <td class="num-cell">${String(num).padStart(2, '0')}</td>
-            <td><input type="text" class="left" value="${data.nom || ''}" placeholder="Nom" ${s} style="min-width:120px"></td>
-            <td><input type="text" value="${data.role || ''}" placeholder="Rôle" ${s} style="min-width:80px"></td>
-            <td><input type="number" min="0" value="${data.xp != null ? data.xp : 0}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="5" value="${data.rang != null ? data.rang : 1}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="8" value="${data.mv != null ? data.mv : 6}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="6" value="${data.str != null ? data.str : 4}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="6" value="${data.agi != null ? data.agi : 4}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="6" value="${data.rap != null ? data.rap : 4}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="6" value="${data.hab != null ? data.hab : 4}" ${s} style="width:46px"></td>
-            <td><input type="number" min="1" max="6" value="${data.arm != null ? data.arm : 4}" ${s} style="width:46px"></td>
-            <td><input type="text" value="${data.comp || ''}" placeholder="—" ${s} style="min-width:100px"></td>
+            <td><input type="text" class="left" value="${data.nom || ''}" placeholder="Nom" ${s} style="min-width:110px"></td>
+            <td><input type="text" value="${data.role || ''}" placeholder="Rôle" ${s} style="min-width:70px"></td>
+            <td><input type="number" min="0" value="${data.xp != null ? data.xp : 0}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="5" value="${data.rang != null ? data.rang : 1}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="8" value="${data.mv != null ? data.mv : 6}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="6" value="${data.str != null ? data.str : 4}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="6" value="${data.agi != null ? data.agi : 4}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="6" value="${data.rap != null ? data.rap : 4}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="6" value="${data.hab != null ? data.hab : 4}" ${s} style="width:40px"></td>
+            <td><input type="number" min="1" max="6" value="${data.arm != null ? data.arm : 4}" ${s} style="width:40px"></td>
+            <td><input type="text" value="${data.comp || ''}" placeholder="—" ${s} style="min-width:90px"></td>
             <td>
-                <input type="number" min="0" value="${data.valeur != null ? data.valeur : 0}" style="width:60px" oninput="calcTotal(${teamIdx});scheduleSave()">
+                <input type="number" min="0" value="${data.valeur != null ? data.valeur : 0}" style="width:55px" oninput="calcTotal(${teamIdx});scheduleSave()">
                 <span style="color:var(--muted);font-size:10px"> MC</span>
             </td>
             <td><button class="delete-btn">✕</button></td>
@@ -1221,14 +1217,14 @@
                     <span class="team-dot" style="color:${TEAM_COLORS[i]};background:${TEAM_COLORS[i]}"></span>
                     <strong style="color:var(--text)">${name}</strong>
                 </td>
-                <td><input type="number" min="0" value="0" style="width:44px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:44px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:44px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:44px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:50px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:50px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:46px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:46px" ${oi}></td>
                 <td class="diff-cell" style="font-weight:700;color:var(--muted)">0</td>
-                <td class="pts-cell"><input type="number" min="0" value="0" style="width:54px" ${oi}></td>
+                <td class="pts-cell"><input type="number" min="0" value="0" style="width:50px" ${oi}></td>
                 <td class="mc-val pts-cell" id="classement-mc-${i}" style="font-family:Orbitron,sans-serif;font-size:0.95rem;color:var(--accent3);font-weight:700">${mcVal} MC</td>
             `;
             if (i === 0) tr.classList.add('leader');
@@ -1305,11 +1301,11 @@
             
             tr.innerHTML = `
                 <td class="match-num">J${idx + 1}</td>
-                <td style="min-width:140px"><select style="color:${colDom}" onchange="this.style.color=window.getTeamColor(this.value);scheduleSave()">${opts(dom)}</select></td>
+                <td style="min-width:120px"><select style="color:${colDom}" onchange="this.style.color=window.getTeamColor(this.value);scheduleSave()">${opts(dom)}</select></td>
                 <td class="score-cell"><input type="number" min="0" class="score-input" placeholder="-" oninput="scheduleSave()"></td>
                 <td class="score-sep">—</td>
                 <td class="score-cell"><input type="number" min="0" class="score-input" placeholder="-" oninput="scheduleSave()"></td>
-                <td style="min-width:140px"><select style="color:${colExt}" onchange="this.style.color=window.getTeamColor(this.value);scheduleSave()">${opts(ext)}</select></td>
+                <td style="min-width:120px"><select style="color:${colExt}" onchange="this.style.color=window.getTeamColor(this.value);scheduleSave()">${opts(ext)}</select></td>
                 <td class="match-status-td"><span class="match-status ms-programme" data-status="programme" onclick="cycleStatus(this)">Programmé</span></td>
             `;
             tbody.appendChild(tr);
