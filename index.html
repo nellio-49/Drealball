@@ -346,10 +346,10 @@
         tbody tr:hover { background: var(--surface2); }
         
         td { padding: 0; }
-        .data-table td input, .classement-table td input {
+        .data-table td input, .data-table td select, .classement-table td input {
             display: block;
             width: 100%;
-            padding: 10px 6px;
+            padding: 8px 6px;
             min-height: 40px;
             background: transparent;
             border: 1px solid transparent;
@@ -362,8 +362,15 @@
             text-align: center;
             min-width: 36px;
         }
+        .data-table td select {
+            cursor: pointer;
+        }
+        .data-table td select option {
+            background: #ffffff;
+            color: var(--text);
+        }
         .data-table td input.left { text-align: left; }
-        .data-table td input:focus, .classement-table td input:focus {
+        .data-table td input:focus, .data-table td select:focus, .classement-table td input:focus {
             background: #ffffff;
             border-color: var(--accent);
         }
@@ -885,21 +892,21 @@
             const players = [];
             
             panel.querySelectorAll(`#roster-body-${i} tr`).forEach(tr => {
-                const ins = tr.querySelectorAll('input');
-                if (ins.length >= 11) {
+                const fields = tr.querySelectorAll('input, select');
+                if (fields.length >= 11) {
                     players.push({
-                        nom:    ins[0].value,
-                        role:   ins[1].value,
-                        xp:     Number(ins[2].value)  || 0,
-                        rang:   Number(ins[3].value)  || 1,
-                        mv:     Number(ins[4].value)  || 6,
-                        str:    Number(ins[5].value)  || 4,
-                        agi:    Number(ins[6].value)  || 4,
-                        rap:    Number(ins[7].value)  || 4,
-                        hab:    Number(ins[8].value)  || 4,
-                        arm:    Number(ins[9].value)  || 4,
-                        comp:   ins[10].value,
-                        valeur: Number(ins[11].value) || 0
+                        nom:    fields[0].value,
+                        role:   fields[1].value,
+                        xp:     Number(fields[2].value)  || 0,
+                        rang:   Number(fields[3].value)  || 1,
+                        mv:     Number(fields[4].value)  || 6,
+                        str:    Number(fields[5].value)  || 4,
+                        agi:    Number(fields[6].value)  || 4,
+                        rap:    Number(fields[7].value)  || 4,
+                        hab:    Number(fields[8].value)  || 4,
+                        arm:    Number(fields[9].value)  || 4,
+                        comp:   fields[10].value,
+                        valeur: Number(fields[11].value) || 0
                     });
                 }
             });
@@ -993,20 +1000,20 @@
                 } else {
                     existingRows.forEach((tr, pi) => {
                         const p   = players[pi];
-                        const ins = tr.querySelectorAll('input');
+                        const fields = tr.querySelectorAll('input, select');
                         if (!p) return;
-                        setIfNotFocused(ins[0],  p.nom  || '');
-                        setIfNotFocused(ins[1],  p.role || '');
-                        setIfNotFocused(ins[2],  p.xp   != null ? p.xp   : 0);
-                        setIfNotFocused(ins[3],  p.rang != null ? p.rang : 1);
-                        setIfNotFocused(ins[4],  p.mv   != null ? p.mv   : 6);
-                        setIfNotFocused(ins[5],  p.str  != null ? p.str  : 4);
-                        setIfNotFocused(ins[6],  p.agi  != null ? p.agi  : 4);
-                        setIfNotFocused(ins[7],  p.rap  != null ? p.rap  : 4);
-                        setIfNotFocused(ins[8],  p.hab  != null ? p.hab  : 4);
-                        setIfNotFocused(ins[9],  p.arm  != null ? p.arm  : 4);
-                        setIfNotFocused(ins[10], p.comp || '');
-                        setIfNotFocused(ins[11], p.valeur != null ? p.valeur : 0);
+                        setIfNotFocused(fields[0],  p.nom  || '');
+                        setIfNotFocused(fields[1],  p.role || '');
+                        setIfNotFocused(fields[2],  p.xp   != null ? p.xp   : 0);
+                        setIfNotFocused(fields[3],  p.rang != null ? p.rang : 1);
+                        setIfNotFocused(fields[4],  p.mv   != null ? p.mv   : 6);
+                        setIfNotFocused(fields[5],  p.str  != null ? p.str  : 4);
+                        setIfNotFocused(fields[6],  p.agi  != null ? p.agi  : 4);
+                        setIfNotFocused(fields[7],  p.rap  != null ? p.rap  : 4);
+                        setIfNotFocused(fields[8],  p.hab  != null ? p.hab  : 4);
+                        setIfNotFocused(fields[9],  p.arm  != null ? p.arm  : 4);
+                        setIfNotFocused(fields[10], p.comp || '');
+                        setIfNotFocused(fields[11], p.valeur != null ? p.valeur : 0);
                     });
                     window.calcTotal(i);
                 }
@@ -1046,9 +1053,7 @@
             });
         }
 
-        // Met à jour le classement en fonction des rencontres
         window.updateClassementFromMatches();
-
         document.getElementById('sync-indicator').style.display = 'flex';
     }
 
@@ -1072,7 +1077,7 @@
             return;
         }
         if (iAmSaving) return;
-        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+        if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.tagName === 'SELECT')) return;
         applyState(data, false);
     });
 </script>
@@ -1125,11 +1130,19 @@
         const tbody = document.getElementById(`roster-body-${teamIdx}`);
         const tr = document.createElement('tr');
         const s = 'oninput="scheduleSave()"';
+        const sc = 'onchange="scheduleSave()"';
         
         tr.innerHTML = `
             <td class="num-cell">${String(num).padStart(2, '0')}</td>
             <td><input type="text" class="left" value="${data.nom || ''}" placeholder="Nom" ${s} style="min-width:110px"></td>
-            <td><input type="text" value="${data.role || ''}" placeholder="Rôle" ${s} style="min-width:70px"></td>
+            <td>
+                <select ${sc} style="min-width:85px">
+                    <option value="" ${!data.role ? 'selected' : ''}>—</option>
+                    <option value="Guard" ${data.role === 'Guard' ? 'selected' : ''}>Guard</option>
+                    <option value="Striker" ${data.role === 'Striker' ? 'selected' : ''}>Striker</option>
+                    <option value="Jack" ${data.role === 'Jack' ? 'selected' : ''}>Jack</option>
+                </select>
+            </td>
             <td><input type="number" min="0" value="${data.xp != null ? data.xp : 0}" ${s} style="width:40px"></td>
             <td><input type="number" min="1" max="5" value="${data.rang != null ? data.rang : 1}" ${s} style="width:40px"></td>
             <td><input type="number" min="1" max="8" value="${data.mv != null ? data.mv : 6}" ${s} style="width:40px"></td>
@@ -1170,8 +1183,8 @@
         
         let sum = 0;
         document.getElementById(`roster-body-${teamIdx}`).querySelectorAll('tr').forEach(tr => {
-            const ins = tr.querySelectorAll('input');
-            if (ins[11]) sum += Number(ins[11].value) || 0;
+            const fields = tr.querySelectorAll('input, select');
+            if (fields[11]) sum += Number(fields[11].value) || 0;
         });
         
         const total = sum + (des * 50) + (cartes * 75) + (coach * 80) + (pompom * 80);
@@ -1183,7 +1196,6 @@
         sortClassement();
     };
 
-    // ── Calcul Automatique du Classement selon les Rencontres ────────
     window.updateClassementFromMatches = function() {
         const names = Array.from(document.querySelectorAll('.team-name-big')).map((el, i) => el.value || TEAM_DEFAULTS_NAMES[i]);
         
@@ -1305,7 +1317,6 @@
         td8.style.color = diff >= 0 ? 'var(--accent)' : 'var(--accent2)';
     };
 
-    /* Tri par Valeur MC (priorité 1), puis Points (2), puis Différence (3) */
     window.sortClassement = function() {
         const tbody = document.getElementById('classement-body');
         const rows  = Array.from(tbody.querySelectorAll('tr'));
