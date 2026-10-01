@@ -452,7 +452,7 @@
         
         .rank {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 900;
             color: var(--muted);
         }
@@ -578,14 +578,12 @@
 
         /* ─── OPTIMISATIONS MOBILES SPÉCIFIQUES (ÉCRANS < 768px) ─── */
         @media (max-width: 768px) {
-            /* Empêcher le zoom auto Safari sur focus des champs */
             input, select, textarea {
                 font-size: 16px !important;
             }
 
             .card { padding: 12px; border-radius: 8px; }
             
-            /* En-tête d'équipe empilé */
             .team-header {
                 flex-direction: column;
                 align-items: stretch;
@@ -599,7 +597,6 @@
                 padding-top: 10px;
             }
             
-            /* Colonnes fixées à gauche dans le tableau des joueurs */
             .data-table th:nth-child(1), .data-table td:nth-child(1) {
                 position: sticky;
                 left: 0;
@@ -619,7 +616,6 @@
             }
             .data-table td:nth-child(2) { background: var(--surface); }
 
-            /* Grid 2x2 pour le pied de page d'équipe */
             .team-footer {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -633,7 +629,6 @@
             }
             .footer-field.total input { width: 100%; }
 
-            /* Formatage compact des calendriers */
             .match-table th, .match-table td { padding: 4px 2px !important; }
             .match-table td select { font-size: 14px !important; padding: 4px 2px; }
             .score-input { width: 36px !important; }
@@ -1019,23 +1014,6 @@
             });
         }
 
-        if (state.classement) {
-            Object.keys(state.classement).forEach(idx => {
-                const tr = document.querySelector(`#classement-body tr[data-team-idx="${idx}"]`);
-                if (!tr) return;
-                const c   = state.classement[idx];
-                const ins = tr.querySelectorAll('input[type="number"]');
-                [c.mj, c.v, c.n, c.d, c.pp, c.pm, c.pts].forEach((v,j) => {
-                    setIfNotFocused(ins[j], v || 0);
-                });
-                window.recalcRow(ins[0]);
-                const mcVal = Number(document.getElementById(`total-${idx}`)?.value)||0;
-                const mc = tr.querySelector('.mc-val');
-                if (mc) mc.textContent = `${mcVal} MC`;
-            });
-            window.sortClassementByMC();
-        }
-
         if (state.matches) {
             ['aller','retour'].forEach(phase => {
                 if (!state.matches[phase]) return;
@@ -1067,6 +1045,10 @@
                 });
             });
         }
+
+        // Met à jour le classement en fonction des rencontres
+        window.updateClassementFromMatches();
+
         document.getElementById('sync-indicator').style.display = 'flex';
     }
 
@@ -1115,6 +1097,7 @@
     function onTeamNameChange(idx, val) {
         document.getElementById(`tabBtn${idx}`).textContent = `⬡ ${val || `Équipe ${idx+1}`}`;
         syncTeamName(idx, val || `Équipe ${idx+1}`);
+        updateClassementFromMatches();
         scheduleSave();
     }
 
@@ -1196,8 +1179,86 @@
         
         const mcCell = document.getElementById(`classement-mc-${teamIdx}`);
         if (mcCell) mcCell.textContent = `${total} MC`;
+    };
+
+    // ── Calcul Automatique du Classement selon les Rencontres ────────
+    window.updateClassementFromMatches = function() {
+        const names = Array.from(document.querySelectorAll('.team-name-big')).map((el, i) => el.value || TEAM_DEFAULTS_NAMES[i]);
         
-        window.sortClassementByMC();
+        const stats = {};
+        names.forEach(name => {
+            stats[name] = { mj: 0, v: 0, n: 0, d: 0, pp: 0, pm: 0, pts: 0 };
+        });
+
+        document.querySelectorAll('#match-body-aller tr, #match-body-retour tr').forEach(tr => {
+            const domSelect = tr.querySelectorAll('select')[0];
+            const extSelect = tr.querySelectorAll('select')[1];
+            const scores    = tr.querySelectorAll('.score-input');
+            const statusSpan = tr.querySelector('.match-status');
+
+            const domName = domSelect?.value;
+            const extName = extSelect?.value;
+            const status  = statusSpan?.dataset.status;
+            const sDVal   = scores[0]?.value;
+            const sEVal   = scores[1]?.value;
+
+            // Le match est comptabilisé s'il est "Joué" et possède des scores valides
+            if (status === 'joue' && sDVal !== '' && sEVal !== '' && !isNaN(sDVal) && !isNaN(sEVal)) {
+                const sD = parseInt(sDVal, 10);
+                const sE = parseInt(sEVal, 10);
+
+                if (stats[domName] && stats[extName]) {
+                    stats[domName].mj += 1;
+                    stats[extName].mj += 1;
+
+                    stats[domName].pp += sD;
+                    stats[domName].pm += sE;
+                    stats[extName].pp += sE;
+                    stats[extName].pm += sD;
+
+                    if (sD > sE) {
+                        stats[domName].v += 1;
+                        stats[domName].pts += 3;
+                        stats[extName].d += 1;
+                    } else if (sD < sE) {
+                        stats[extName].v += 1;
+                        stats[extName].pts += 3;
+                        stats[domName].d += 1;
+                    } else {
+                        stats[domName].n += 1;
+                        stats[domName].pts += 1;
+                        stats[extName].n += 1;
+                        stats[extName].pts += 1;
+                    }
+                }
+            }
+        });
+
+        document.querySelectorAll('#classement-body tr').forEach(tr => {
+            const teamIdx = tr.getAttribute('data-team-idx');
+            const teamName = names[teamIdx];
+            const st = stats[teamName] || { mj: 0, v: 0, n: 0, d: 0, pp: 0, pm: 0, pts: 0 };
+            
+            const ins = tr.querySelectorAll('input[type="number"]');
+            if (ins.length >= 7) {
+                ins[0].value = st.mj;
+                ins[1].value = st.v;
+                ins[2].value = st.n;
+                ins[3].value = st.d;
+                ins[4].value = st.pp;
+                ins[5].value = st.pm;
+                ins[6].value = st.pts;
+            }
+
+            const diff = st.pp - st.pm;
+            const td8 = tr.querySelector('.diff-cell') || tr.querySelectorAll('td')[8];
+            if (td8) {
+                td8.textContent = (diff >= 0 ? '+' : '') + diff;
+                td8.style.color = diff >= 0 ? 'var(--accent)' : 'var(--accent2)';
+            }
+        });
+
+        sortClassement();
     };
 
     function buildClassement() {
@@ -1208,7 +1269,6 @@
         names.forEach((name, i) => {
             const tr = document.createElement('tr');
             tr.setAttribute('data-team-idx', String(i));
-            const oi = 'oninput="recalcRow(this);scheduleSave()"';
             const mcVal = Number(document.getElementById(`total-${i}`)?.value) || 0;
             
             tr.innerHTML = `
@@ -1217,20 +1277,20 @@
                     <span class="team-dot" style="color:${TEAM_COLORS[i]};background:${TEAM_COLORS[i]}"></span>
                     <strong style="color:var(--text)">${name}</strong>
                 </td>
-                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:40px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:46px" ${oi}></td>
-                <td><input type="number" min="0" value="0" style="width:46px" ${oi}></td>
+                <td><input type="number" min="0" value="0" style="width:40px" readonly></td>
+                <td><input type="number" min="0" value="0" style="width:40px" readonly></td>
+                <td><input type="number" min="0" value="0" style="width:40px" readonly></td>
+                <td><input type="number" min="0" value="0" style="width:40px" readonly></td>
+                <td><input type="number" min="0" value="0" style="width:46px" readonly></td>
+                <td><input type="number" min="0" value="0" style="width:46px" readonly></td>
                 <td class="diff-cell" style="font-weight:700;color:var(--muted)">0</td>
-                <td class="pts-cell"><input type="number" min="0" value="0" style="width:50px" ${oi}></td>
+                <td class="pts-cell"><input type="number" min="0" value="0" style="width:50px" readonly></td>
                 <td class="mc-val pts-cell" id="classement-mc-${i}" style="font-family:Orbitron,sans-serif;font-size:0.95rem;color:var(--accent3);font-weight:700">${mcVal} MC</td>
             `;
             if (i === 0) tr.classList.add('leader');
             tbody.appendChild(tr);
         });
-        window.sortClassementByMC();
+        updateClassementFromMatches();
     }
 
     window.recalcRow = function(input) {
@@ -1249,7 +1309,12 @@
         const rows  = Array.from(tbody.querySelectorAll('tr'));
         rows.sort((a,b) => {
             const p = r => Number(r.querySelectorAll('input[type="number"]')[6]?.value) || 0;
-            return p(b) - p(a);
+            const diff = r => parseInt(r.querySelector('.diff-cell')?.textContent) || 0;
+            const pp = r => Number(r.querySelectorAll('input[type="number"]')[4]?.value) || 0;
+            
+            if (p(b) !== p(a)) return p(b) - p(a);
+            if (diff(b) !== diff(a)) return diff(b) - diff(a);
+            return pp(b) - pp(a);
         });
         rows.forEach((r,i) => {
             const rank = i + 1;
@@ -1301,11 +1366,11 @@
             
             tr.innerHTML = `
                 <td class="match-num">J${idx + 1}</td>
-                <td style="min-width:120px"><select style="color:${colDom}" onchange="this.style.color=window.getTeamColor(this.value);scheduleSave()">${opts(dom)}</select></td>
-                <td class="score-cell"><input type="number" min="0" class="score-input" placeholder="-" oninput="scheduleSave()"></td>
+                <td style="min-width:120px"><select style="color:${colDom}" onchange="this.style.color=window.getTeamColor(this.value);updateClassementFromMatches();scheduleSave()">${opts(dom)}</select></td>
+                <td class="score-cell"><input type="number" min="0" class="score-input" placeholder="-" oninput="updateClassementFromMatches();scheduleSave()"></td>
                 <td class="score-sep">—</td>
-                <td class="score-cell"><input type="number" min="0" class="score-input" placeholder="-" oninput="scheduleSave()"></td>
-                <td style="min-width:120px"><select style="color:${colExt}" onchange="this.style.color=window.getTeamColor(this.value);scheduleSave()">${opts(ext)}</select></td>
+                <td class="score-cell"><input type="number" min="0" class="score-input" placeholder="-" oninput="scheduleSave();updateClassementFromMatches()"></td>
+                <td style="min-width:120px"><select style="color:${colExt}" onchange="this.style.color=window.getTeamColor(this.value);updateClassementFromMatches();scheduleSave()">${opts(ext)}</select></td>
                 <td class="match-status-td"><span class="match-status ms-programme" data-status="programme" onclick="cycleStatus(this)">Programmé</span></td>
             `;
             tbody.appendChild(tr);
@@ -1320,6 +1385,7 @@
         el.dataset.status = next;
         el.className  = `match-status ms-${next}`;
         el.textContent = labels[next];
+        updateClassementFromMatches();
         scheduleSave();
     };
 
