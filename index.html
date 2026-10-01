@@ -32,14 +32,14 @@
             overflow-x: hidden;
         }
 
-        /* Image de fond avec fondu clair */
+        /* Image de fond visible avec fondu clair */
         .bg-image {
             position: fixed;
             inset: 0;
             background-image: url('dreadball.webp');
             background-size: cover;
             background-position: center top;
-            opacity: 0.12;
+            opacity: 0.35; /* Opacité renforcée */
             z-index: 0;
             pointer-events: none;
         }
@@ -48,7 +48,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center top, rgba(244, 246, 249, 0.1) 0%, rgba(244, 246, 249, 0.85) 65%, #f4f6f9 100%);
+            background: radial-gradient(ellipse at center top, rgba(244, 246, 249, 0.1) 0%, rgba(244, 246, 249, 0.5) 60%, #f4f6f9 100%);
         }
 
         /* Motif grille */
